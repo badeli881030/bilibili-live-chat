@@ -1,16 +1,5 @@
 <template>
   <div v-if="isGiftList" class="danmaku-list-pinned" ref="danmakuListRef">
-    <div class="danmaku-list hidden">
-      <danmaku-item
-        v-for="i in giftPin"
-        :key="i"
-        :show-face="giftShowFace"
-        type="gift"
-        uname="某人"
-        giftName="礼物"
-        :num="i"
-      />
-    </div>
     <div class="danmaku-list absolute" ref="giftListRef">
       <danmaku-item
         v-for="item in danmakuList"
@@ -51,6 +40,7 @@ export default {
     ...propsType,
     isGiftList: Boolean,
     giftShowFace: Boolean,
+    isJoinList: Boolean,
   },
   setup(props) {
     // 运行状态
@@ -64,7 +54,7 @@ export default {
 
     // 移除不可见弹幕
     onMounted(() => {
-      const topOfList = danmakuListRef.value.getBoundingClientRect().top - 5;
+      const topOfList = props.isJoinList ? 5 : danmakuListRef.value.getBoundingClientRect().top - 5;
       const removeInvisibleDanmaku = () => {
         const i = danmakuList.value.findIndex(item => {
           const { top = topOfList, height = 0 } = item.el?.$el?.getBoundingClientRect() ?? {};
@@ -82,7 +72,7 @@ export default {
       const el = unref(props.isGiftList ? giftListRef : danmakuListRef);
       if (el) el.scrollTop = el.scrollHeight;
     };
-    if (!props.isGiftList) {
+    if (!props.isGiftList || props.isJoinList) {
       onMounted(() => window.addEventListener('resize', scrollList));
       onBeforeUnmount(() => window.removeEventListener('resize', scrollList));
     }
@@ -118,6 +108,8 @@ export default {
         danmaku.face = face;
       }
       danmaku.stay = danmaku.stay || (props.display === 'bottom' ? props.stay : 0);
+      if (props.isJoinList) danmaku.stay = 2500;
+
       danmakuQueue.push({
         props: danmaku,
         key: uuid(),

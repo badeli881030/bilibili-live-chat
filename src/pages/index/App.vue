@@ -1,9 +1,11 @@
 <template>
   <div id="panel" class="panel panel-default">
     <div class="panel-heading">
-      <h2 class="panel-title" style="font-size: 30px; display: inline-block; margin-right: 10px">Bilibili Live Chat</h2>
+      <h2 class="panel-title" style="font-size: 30px; display: inline-block; margin-right: 10px">
+        Bilibili Live Chat FFXIV Overlay
+      </h2>
       <iframe
-        src="https://ghbtns.com/github-btn.html?user=Tsuk1ko&amp;repo=bilibili-live-chat&amp;type=star&amp;count=true&amp;size=large"
+        src="https://ghbtns.com/github-btn.html?user=Small-Miao&amp;repo=bilibili-live-chat&amp;type=star&amp;count=true&amp;size=large"
         frameborder="0"
         scrolling="0"
         width="160px"
@@ -32,7 +34,7 @@
           <option v-for="{ value, text } in options.cors" :key="value" :value="value">{{ text }}</option>
         </select>
         <template #footer>
-          <a href="https://github.com/Tsuk1ko/bilibili-live-chat#直接跨域" target="_blank">查看说明</a>
+          <a href="https://github.com/Small-Miao/bilibili-live-chat#直接跨域" target="_blank">查看说明</a>
         </template>
       </input-group>
       <!-- 显示头像 -->
@@ -41,7 +43,7 @@
           <option v-for="{ value, text } in options.face" :key="value" :value="value">{{ text }}</option>
         </select>
         <template #footer>
-          <a href="https://github.com/Tsuk1ko/bilibili-live-chat#显示头像" target="_blank">查看说明</a>
+          <a href="https://github.com/Small-Miao/bilibili-live-chat#显示头像" target="_blank">查看说明</a>
         </template>
       </input-group>
       <!-- 头像缓存 -->
@@ -169,7 +171,7 @@ export default {
 
     return {
       form,
-      goLive: () => (window.location.href = `live.html#${qss(simpleForm.value)}`),
+      goLive: () => (window.location = `live.html#${qss(simpleForm.value)}`),
       options: readonly(selectOptions),
     };
   },

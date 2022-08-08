@@ -33,19 +33,25 @@ export default {
     const isBlockedUID = uid => blockUIDs.value.has(String(uid));
 
     const addInfoDanmaku = message => {
-      danmakuList.value.addDanmaku({
-        type: 'info',
-        message,
-        stay: props.stay || 5000,
-      });
+      let infoMsg = `${message}`;
+      const danmaku = {
+        type: 'message',
+        showFace: giftShowFace.value,
+        uid: 32300567,
+        uname: '系统喵',
+        message: infoMsg,
+      };
+      addDanmaku(danmaku);
     };
     const addDanmaku = danmaku => {
       if (props.limit) danmakuList.value.addSpeedLimitDanmaku(danmaku);
       else danmakuList.value.addDanmaku(danmaku);
     };
-
     onMounted(() => {
       console.log('正在连接直播弹幕服务器');
+      addInfoDanmaku('本项目基于 Tsuk1ko_bilibili-live-chat修改');
+      addInfoDanmaku('Modify with Small_Miao');
+
       const live = new KeepLiveWS(props.room);
       onBeforeUnmount(() => live.close());
       live.on('open', () => {
@@ -57,7 +63,10 @@ export default {
         addInfoDanmaku(`已连接直播间 ${props.room}`);
       });
       live.on('close', () => console.log('已断开与直播弹幕服务器的连接'));
-      live.on('heartbeat', online => console.log('当前人气值', online));
+      live.on('heartbeat', online => {});
+      live.on('INTERACT_WORD', data => {
+        addInfoDanmaku(`用户 ${data.data.uname} 进入了房间`);
+      });
 
       // 礼物
       const giftList = props.giftPin ? giftPinList : danmakuList;
