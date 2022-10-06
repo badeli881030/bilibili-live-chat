@@ -31,7 +31,6 @@ export default {
 
     const blockUIDs = computed(() => new Set(props.blockUID.split('|').map(uid => uid.trim())));
     const isBlockedUID = uid => blockUIDs.value.has(String(uid));
-
     const addInfoDanmaku = message => {
       let infoMsg = `${message}`;
       const danmaku = {
@@ -66,6 +65,9 @@ export default {
       live.on('heartbeat', online => {});
       live.on('INTERACT_WORD', data => {
         addInfoDanmaku(`用户 ${data.data.uname} 进入了房间`);
+        if (props.tts == 'true') {
+          window.callOverlayHandler({ call: 'cactbotSay', text: `用户 ${data.data.uname} 进入了房间` });
+        }
       });
 
       // 礼物
@@ -117,6 +119,9 @@ export default {
         if (isBlockedUID(uid)) {
           console.log(`屏蔽了来自[${uname}]的弹幕：${message}`);
           return;
+        }
+        if (props.tts == 'true') {
+          window.callOverlayHandler({ call: 'cactbotSay', text: `${uname} 说 ${message}` });
         }
         const danmaku = {
           type: 'message',

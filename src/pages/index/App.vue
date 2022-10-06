@@ -37,6 +37,12 @@
           <a href="https://github.com/Small-Miao/bilibili-live-chat#直接跨域" target="_blank">查看说明</a>
         </template>
       </input-group>
+      <input-group header="语音播报">
+        <select class="form-control" v-model="form.tts">
+          <option v-for="{ value, text } in options.tts" :key="value" :value="value">{{ text }}</option>
+        </select>
+        <template #footer> 本功能需要配合Cactbot使用 </template>
+      </input-group>
       <!-- 显示头像 -->
       <input-group header="显示头像">
         <select class="form-control" v-model="form.face">

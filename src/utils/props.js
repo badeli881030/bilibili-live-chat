@@ -14,6 +14,7 @@ export const defaultProps = {
   giftPin: '',
   delay: '',
   blockUID: '',
+  tts: 'false',
 };
 Object.freeze(defaultProps);
 
@@ -42,6 +43,16 @@ export const selectOptions = {
     {
       value: 'true',
       text: '开启（请阅读右侧说明）',
+    },
+  ],
+  tts: [
+    {
+      value: 'false',
+      text: '关闭',
+    },
+    {
+      value: 'true',
+      text: '开启 语音播报',
     },
   ],
   face: [
