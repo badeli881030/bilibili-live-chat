@@ -50,7 +50,7 @@ export default {
       console.log('正在连接直播弹幕服务器');
       addInfoDanmaku('本项目基于 Tsuk1ko_bilibili-live-chat修改');
       addInfoDanmaku('Modify with Small_Miao');
-
+      addInfoDanmaku('当前版本 20221006.01');
       const live = new KeepLiveWS(props.room);
       onBeforeUnmount(() => live.close());
       live.on('open', () => {

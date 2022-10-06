@@ -2,7 +2,7 @@
   <div id="panel" class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title" style="font-size: 30px; display: inline-block; margin-right: 10px">
-        Bilibili Live Chat FFXIV Overlay
+        Bilibili Live Chat FFXIV Overlay 20221006.01
       </h2>
       <iframe
         src="https://ghbtns.com/github-btn.html?user=Small-Miao&amp;repo=bilibili-live-chat&amp;type=star&amp;count=true&amp;size=large"
